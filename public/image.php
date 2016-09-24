@@ -5,7 +5,7 @@ session_start();
 if (isset($_SESSION['userid']))
 {
     $fileToUpload = get('fileToUpload', null);
-    $imageId = get('image_id', -1); 
+    $orig_image_id = get('image_id', -1); 
     $title = get('title', '');
     $artist = get('artist', '');
     $user_title = get('user_title', '');
@@ -56,8 +56,11 @@ if (isset($_SESSION['userid']))
             //echo '<img src="files/'.$_FILES["fileToUpload"]["name"].'">';
             echo '<img src="'.$url.'">';
 
-	    $res = pg_query("select id from original_image where source_image_url='".$source_image_url."');
-            if(is_resource($res)) {
+	    $res = pg_query("select id from original_image where source_image_url='".$source_image_url."';");
+            if($res && isset($row['id'])) {
+                print "A:".$source_image_url;
+                print_r($res);
+         
                 $row = pg_fetch_assoc($res);
                 $orig_image_id = $row['id'];
             } else {
@@ -67,11 +70,12 @@ if (isset($_SESSION['userid']))
             }  
 
 	    $res = pg_query("insert into user_image(profile_id,title,url) values(".$_SESSION['userid'].",'".$user_title."','".$url."') returning id");
+	    $row = pg_fetch_assoc($res);
 	    $user_image_id = $row['id'];
+ 	    
             $res = pg_query("insert into adaptation(user_image_id,original_image_id) values($user_image_id, $orig_image_id)");
         } else {
             echo "Sorry, there was an error uploading your file.";
         }
     }
 }
-
