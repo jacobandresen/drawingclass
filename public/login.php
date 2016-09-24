@@ -11,7 +11,7 @@ if ($username && $password) {
 
    if (is_resource($res)) {
        $row = pg_fetch_assoc($res) ;
-       $_SESSION['userid' = $row['id'];
+       $_SESSION['userid'] = $row['id'];
        $_SESSION['username'] = $row['username'];
        header("Location: index.php");
    } else {
