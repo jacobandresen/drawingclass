@@ -78,6 +78,5 @@ if (isset($_SESSION['userid'])) {
 <?php
 }
 ?>
-   <script src="inc/uploadform.js"/>
 </body>
 </html>

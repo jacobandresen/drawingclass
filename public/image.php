@@ -1,9 +1,9 @@
 <?php
 require_once('inc/db.php');
+session_start();
+print_r($_SESSION);
 
-print_r($_REQUEST);
-
-//if (isset($_SESSION['userid']))
+if (isset($_SESSION['userid']))
  {
     $fileToUpload = get('fileToUpload', null);
     $imageId = get('image_id', -1); 
@@ -13,6 +13,8 @@ print_r($_REQUEST);
 
     $target_dir = "files/";
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+    //$target_file = $_SESSION['userid'] . $target_file;
+
     $uploadOk = 1;
     $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
@@ -20,7 +22,7 @@ print_r($_REQUEST);
     if(isset($_POST["submit"])) {
         $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
         if($check !== false) {
-            echo "File is an image - " . $check["mime"] . ".";
+            //echo "File is an image - " . $check["mime"] . ".";
             $uploadOk = 1;
         } else {
             echo "File is not an image.";
@@ -28,13 +30,13 @@ print_r($_REQUEST);
         }
      }
      // Check if file already exists
-     if (file_exists($target_file)) {
-         echo "Sorry, file already exists.";
-         $uploadOk = 0;
-     }
+     //if (file_exists($target_file)) {
+     //    echo "Sorry, file already exists.";
+     //    $uploadOk = 0;
+     //}
      // Check file size
      if ($_FILES["fileToUpload"]["size"] > 500000) {
-         echo "Sorry, your file is too large.";
+         //echo "Sorry, your file is too large.";
          $uploadOk = 0;
      }
      // Allow certain file formats
@@ -50,6 +52,7 @@ print_r($_REQUEST);
      } else {
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
             echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+            echo '<a href="files/'.$_FILES["fileToUpload"]["name"].'">link</a>';
         } else {
             echo "Sorry, there was an error uploading your file.";
         }
@@ -58,5 +61,3 @@ print_r($_REQUEST);
 
 // TODO: show original image
 // TODO: show adaptations
-
-
