@@ -22,7 +22,7 @@ if ($username && $password) {
 
 <html>
 <head>
-  Signup 
+   Login  
 </head>
 <body>
 
@@ -39,5 +39,7 @@ if ($username && $password) {
      <input type="password" name="password">
      <input type="submit" value="Login"></input>
    </form>
+
+   <a href="signup.php">Ny bruger</a>
 </body>
 </html>
