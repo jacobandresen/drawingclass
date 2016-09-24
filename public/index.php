@@ -14,9 +14,9 @@ session_start();
     }
 
     //allow facets artist,year
-    if(!isset($_POST['query'])) {
+    if(!isset($_GET['query'])) {
     ?>
-    <form action="index.php" method="post">
+    <form action="index.php" method="GET">
        <input type="text" name="query" />
 <!--       <input type="text" name="year" />
        <input type="text" name="artist" /> -->
@@ -25,9 +25,9 @@ session_start();
    <?php
    } else {
       //show search results
-      $query=$_POST['query'];
-      if(isset($_POST['next']))
-          $next = $_POST['next'];
+      $query=$_GET['query'];
+      if(isset($_GET['next']))
+          $next = $_GET['next'];
       else
    	$next = 0;
 
@@ -62,7 +62,7 @@ session_start();
 		 echo '<a href="creator.php?id='.$cur_doc->id.'">';
                  echo "<image src=\"$cur_doc->medium_image_url\" height=\"42\" width=\"42\" >";
 
-	         if($cur_doc->artist_name) {
+	         if(isset($cur_doc->artist_name)) {
 	             $nr=0;
                      foreach($cur_doc->artist_name as $cur_artist) {
 		         if($nr==0)
@@ -74,10 +74,10 @@ session_start();
                      echo ": ";
                  }
 
-                 if($cur_doc->title_first)
+                 if(isset($cur_doc->title_first))
                      echo "$cur_doc->title_first";
 
-                 if($cur_doc->object_type_dk)
+                 if(isset($cur_doc->object_type_dk))
 		     echo " ($cur_doc->object_type_dk)";
 		 echo "</a>";
 
@@ -90,7 +90,7 @@ session_start();
 curl_close($ch);
 
 ?>
-    <form action="index.php" method="post">
+    <form action="index.php" method="GET">
        <input type="hidden" name="query" value="<?php echo urlencode($query) ?>" />
        <input type="hidden" name="next" value="<?php echo $next+20 ?>" />
        <input type="submit" value="N&aelig;ste" />
@@ -98,7 +98,7 @@ curl_close($ch);
 <?php
 if($next>0) {
 ?>
-    <form action="index.php" method="post">
+    <form action="index.php" method="GET">
        <input type="hidden" name="query" value="<?php echo urlencode($query) ?>" />
        <input type="hidden" name="next" value="<?php echo $next-20 ?>" />
        <input type="submit" value="Forrige" />
