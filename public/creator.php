@@ -15,6 +15,46 @@ require_once('inc/db.php');
 
 if (isset($_SESSION['userid'])) {
   $userid = $_SESSION['userid'];
+
+      $ch = curl_init();
+
+      // set URL and other appropriate options
+      curl_setopt($ch, CURLOPT_URL, "http://demoapi.smk.dk/api/artworks?refnum=$id&start=0&rows=10");
+
+      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+      curl_setopt($ch, CURLOPT_HEADER, 0);
+
+      // grab URL and pass it to the browser
+      $apidata_ind=curl_exec($ch);
+
+      $nye = json_decode($apidata_ind);
+
+      if(isset($nye->error)) {
+          print_r($nye);
+	  die($nye->error);
+      }
+      else {
+		# print_r($nye->response->docs);
+		foreach($nye->response->docs as $cur_doc) {
+                	echo "<image src=\"$cur_doc->medium_image_url\" height=\"420\" width=\"420\" >";
+                     	foreach($cur_doc->artist_name as $cur_artist) {
+		         if($nr==0)
+		             echo "<br />$cur_artist";
+                         else
+			     echo ", $cur_artist";
+			$nr++;
+                     	}
+			echo ": ";
+
+                 	if($cur_doc->title_first)
+                     		echo "$cur_doc->title_first";
+
+                 	if($cur_doc->object_type_dk)
+		     		echo " ($cur_doc->object_type_dk)";
+			
+		}
+      }
+
 ?>
 
 <img id="preview" />
