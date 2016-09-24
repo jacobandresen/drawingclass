@@ -1,7 +1,6 @@
 ﻿create table profile (
   id 				   serial,
-  firstname 			   varchar(256) not null,
-  lastname  			   varchar(256),
+  username 			   varchar(256) not null,
   email     			   varchar(256) not null,
   password  			   varchar(256) not null,
   PRIMARY KEY(id)
