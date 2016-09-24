@@ -12,6 +12,7 @@ require_once('inc/db.php');
   $id = get('id', -1);
   $title = get('title', '');
   $artist = get('artist', '');
+  $url ="";
 
 if (isset($_SESSION['userid'])) {
   $userid = $_SESSION['userid'];
@@ -36,6 +37,7 @@ if (isset($_SESSION['userid'])) {
       else {
 		# print_r($nye->response->docs);
 		foreach($nye->response->docs as $cur_doc) {
+			$url = $cur_doc->medium_image_url;
                 	echo "<image src=\"$cur_doc->medium_image_url\" height=\"420\" width=\"420\" >";
                      	foreach($cur_doc->artist_name as $cur_artist) {
 		         if($nr==0)
@@ -66,6 +68,7 @@ if (isset($_SESSION['userid'])) {
         <input type="hidden" name="profile_id" value="<?php print $userid; ?>">
         <input type="hidden" name="title" value="<?php print $title; ?>"> 
         <input type="hidden" name="artist" value="<?php print $artist; ?>"> 
+        <input type="hidden" name="url" value="<?php print $url; ?>">
         <label for="user_title">Titel</label>
         <input type="text" name="user_title" value="<?php $title;?>">
 

@@ -1,19 +1,20 @@
 <?php
 require_once('inc/db.php');
 session_start();
-print_r($_SESSION);
 
 if (isset($_SESSION['userid']))
- {
+{
     $fileToUpload = get('fileToUpload', null);
     $imageId = get('image_id', -1); 
     $title = get('title', '');
     $artist = get('artist', '');
     $user_title = get('user_title', '');
+    $source_image_url = get('url', '');
+
+    print "<img src='".$source_image_url."'>";
 
     $target_dir = "files/";
     $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
-    //$target_file = $_SESSION['userid'] . $target_file;
 
     $uploadOk = 1;
     $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
@@ -51,13 +52,15 @@ if (isset($_SESSION['userid']))
          // if everything is ok, try to upload file
      } else {
         if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
-            echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
-            echo '<a href="files/'.$_FILES["fileToUpload"]["name"].'">link</a>';
+	    $url = "files/".basename($_FILES["fileToUpload"]["name"]);
+            //echo '<img src="files/'.$_FILES["fileToUpload"]["name"].'">';
+            echo '<img src="'.$url.'">';
+            pg_query("insert into original_image(archive_id,title,artist,source_image_url) values(1,'".$title."','".$artist."','".$source_image_url."')");
+	    pg_query("insert into user_image(profile_id,title,url) values(".$_SESSION['userid'].",'".$user_title."','".$url."')");
         } else {
             echo "Sorry, there was an error uploading your file.";
         }
     }
 }
 
-// TODO: show original image
-// TODO: show adaptations
+// TODO: show other adaptations

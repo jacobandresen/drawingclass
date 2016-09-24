@@ -14,6 +14,8 @@ create table archive (
   PRIMARY KEY(id)
  );
 
+insert into archive(name, homepage, contactemail) values('SMK', 'http://smk.dk', 'info@smk.dk');
+
 create table user_image (
   id				   serial,
   profile_id			   integer,
