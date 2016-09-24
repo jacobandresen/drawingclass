@@ -1,2 +1,2 @@
 <?php
-// upload image and associate to profile  + original image
+// upload image and associate to profile + original image
