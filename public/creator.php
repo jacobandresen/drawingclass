@@ -74,8 +74,7 @@ if (isset($_SESSION['userid'])) {
         <input type="hidden" name="title" value="<?php print $title; ?>"> 
         <input type="hidden" name="artist" value="<?php print $artist; ?>"> 
         <input type="hidden" name="url" value="<?php print $url; ?>">
-        <label for="user_title">Titel</label>
-        <input type="text" name="user_title" value="<?php $title;?>">
+        <input type="hidden" name="user_title" value="<?php $title;?>">
 
 	<div id="accept">
 	<button class="uploadform__btn uploadform__btn--accept" type="submit" name="submit">Accept</button>
