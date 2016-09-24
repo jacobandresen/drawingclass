@@ -57,29 +57,31 @@ session_start();
       else {
          echo "<ul>\n";
 	 foreach($nye->response->docs as $cur_doc) {
-	     echo "<li>";
-             if($cur_doc->medium_image_url)
+             if(isset($cur_doc->medium_image_url)) {
+	         echo "<li>";
+		 echo '<a href="creator.php?id='.$cur_doc->id.'">';
                  echo "<image src=\"$cur_doc->medium_image_url\" height=\"42\" width=\"42\" >";
 
-	     if($cur_doc->artist_name) {
-	         $nr=0;
-                 foreach($cur_doc->artist_name as $cur_artist) {
-		     if($nr==0)
-		         echo "$cur_artist";
-                     else
-			 echo ", $cur_artist";
+	         if($cur_doc->artist_name) {
+	             $nr=0;
+                     foreach($cur_doc->artist_name as $cur_artist) {
+		         if($nr==0)
+		             echo "$cur_artist";
+                         else
+			     echo ", $cur_artist";
+                     }
+                     echo ": ";
                  }
-                 echo ": ";
-             }
 
-             if($cur_doc->title_first)
-                 echo "$cur_doc->title_first";
+                 if($cur_doc->title_first)
+                     echo "$cur_doc->title_first";
 
-             if($cur_doc->object_type_dk)
-		 echo " ($cur_doc->object_type_dk)";
+                 if($cur_doc->object_type_dk)
+		     echo " ($cur_doc->object_type_dk)";
+		 echo "</a>";
 
-             # print_r($cur_doc);
-             echo "</li>\n";
+                 echo "</li>\n";
+ 	     }
 	}
         echo "</ul>\n";
     }
