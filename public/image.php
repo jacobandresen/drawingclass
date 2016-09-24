@@ -55,12 +55,23 @@ if (isset($_SESSION['userid']))
 	    $url = "files/".basename($_FILES["fileToUpload"]["name"]);
             //echo '<img src="files/'.$_FILES["fileToUpload"]["name"].'">';
             echo '<img src="'.$url.'">';
-            pg_query("insert into original_image(archive_id,title,artist,source_image_url) values(1,'".$title."','".$artist."','".$source_image_url."')");
-	    pg_query("insert into user_image(profile_id,title,url) values(".$_SESSION['userid'].",'".$user_title."','".$url."')");
+
+	    $res = pg_query("select id from original_image where source_image_url='".$source_image_url."');
+            if(is_resource($res)) {
+                $row = pg_fetch_assoc($res);
+                $orig_image_id = $row['id'];
+            } else {
+                $res = pg_query("insert into original_image(archive_id,title,artist,source_image_url) values(1,'".$title."','".$artist."','".$source_image_url."') returning id");
+	        $row = pg_fetch_assoc($res);
+                $orig_image_id = $row['id'];
+            }  
+
+	    $res = pg_query("insert into user_image(profile_id,title,url) values(".$_SESSION['userid'].",'".$user_title."','".$url."') returning id");
+	    $user_image_id = $row['id'];
+            $res = pg_query("insert into adaptation(user_image_id,original_image_id) values($user_image_id, $orig_image_id)");
         } else {
             echo "Sorry, there was an error uploading your file.";
         }
     }
 }
 
-// TODO: show other adaptations
