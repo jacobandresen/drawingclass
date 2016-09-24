@@ -1,6 +1,12 @@
 <?php
 session_start();
 require_once('inc/db.php');
+if (isset($_SESSION['userid'])) {
+  $userid = $_SESSION['userid'];
+} else {
+	header('Location: login.php');
+}
+
 ?>
 <html>
 <head>
@@ -14,8 +20,6 @@ require_once('inc/db.php');
   $artist = get('artist', '');
   $url ="";
 
-if (isset($_SESSION['userid'])) {
-  $userid = $_SESSION['userid'];
 
       $ch = curl_init();
 
@@ -78,8 +82,5 @@ if (isset($_SESSION['userid'])) {
 	</div>
 </form>
 
-<?php
-}
-?>
 </body>
 </html>
