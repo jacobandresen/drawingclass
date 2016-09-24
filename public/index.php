@@ -69,6 +69,7 @@ session_start();
 		             echo "$cur_artist";
                          else
 			     echo ", $cur_artist";
+			$nr++;
                      }
                      echo ": ";
                  }
