@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once('inc/db.php');
 global $dbconn;
 $username = get('username');
@@ -6,8 +7,12 @@ $password = get('password');
 
 $errStr = ""; 
 if ($username && $password) {
-   $res = pg_query($dbconn, "select username from profile where username='".$username."' and password='".$password."';"); 
+   $res = pg_query($dbconn, "select id,username from profile where username='".$username."' and password='".$password."';"); 
+
    if (is_resource($res)) {
+       $row = pg_fetch_assoc($res) ;
+       $_SESSION['userid' = $row['id'];
+       $_SESSION['username'] = $row['username'];
        header("Location: index.php");
    } else {
        $errStr = "Login fejlede";

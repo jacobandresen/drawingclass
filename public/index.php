@@ -1,11 +1,18 @@
+<?php
+session_start();
+?>
 <html>
    <head>
       <title>Drawing class</title>
    </head>
    <body>
     <?php
-    //entry page: Explorer (search)
-    //show search button
+    if (!isset($_SESSION['username'])) {
+       print "<a href='login.php'>log ind</a>";
+    } else {
+       print "hej ".$_SESSION['username'];
+    }
+
     //allow facets artist,year
     if(!isset($_POST['query'])) {
     ?>

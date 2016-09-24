@@ -17,6 +17,7 @@ $email    = get('email');
      $res = pg_query($dbconn, "insert into profile(username,password,email) values('".$username."','".$password."','".$email."')"); 
      if (is_resource($res)) {
        print "Det lykkedes";
+       $_SESSION['username']="jacob";
      } else {
        print "Fejl! Har du allerede en konto?";
      }
@@ -31,8 +32,8 @@ $email    = get('email');
      <input type="text" name="email">
      <input type="submit" value="Lav ny konto"></input>
    </form>
-  <?php
+<?php
   }
-  ?>
+?>
 </body>
 </html>
