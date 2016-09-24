@@ -11,7 +11,7 @@ if (isset($_SESSION['userid'])) {
 
 	echo "<ul>\n";
 	while ($data=pg_fetch_object($res)) {
-		echo "<li>$data->id - <image src=\"$data->url\" width=\"420\" />  <image src=\"$data->source_image_url\" width=\"420\" /></li>\n";
+		echo "<li><image src=\"$data->url\" width=\"420\" />  <image src=\"$data->source_image_url\" width=\"420\" /></li>\n";
 	}
 	echo "</ul>\n";
 pg_free_result($res);

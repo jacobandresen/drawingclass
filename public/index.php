@@ -8,10 +8,10 @@ require_once('inc/db.php');
       <link rel="stylesheet" href="mock/forsidestyle.css" />
    </head>
    <body>
-    <?php
+   <a href="profile.php">my profile</a>  
+   <?php
     $query=get('query');
     if ($query == "") $query = "picasso";
-
     ?>
     <form class="searchbar" id="searchinput" method="GET">
        <input type="text" class="searchbar__input" placeholder="S&oslash;g kunstner" name="query" />
