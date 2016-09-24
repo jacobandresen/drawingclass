@@ -11,55 +11,55 @@ if (isset($_SESSION['userid'])) {
 <html>
 <head>
    <title>upload</title>
+   <link rel="stylesheet" href="mock/forsidestyle.css"/>
 </head>
 <body>
 
+<form class="searchbar" action="index.php" id="searchinput" method="GET">
+ <input type="text" class="searchbar__input" placeholder="Search for art" name="query"/>
+ <button type="submit" class="searchbar__submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+</form>
+
+<h1 class="title">Create</h1>
 <?php
   $id = get('id', -1);
   $title = get('title', '');
   $artist = get('artist', '');
   $url ="";
 
+  $ch = curl_init();
 
-      $ch = curl_init();
+  // set URL and other appropriate options
+  curl_setopt($ch, CURLOPT_URL, "http://demoapi.smk.dk/api/artworks?refnum=$id&start=0&rows=10");
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+  curl_setopt($ch, CURLOPT_HEADER, 0);
 
-      // set URL and other appropriate options
-      curl_setopt($ch, CURLOPT_URL, "http://demoapi.smk.dk/api/artworks?refnum=$id&start=0&rows=10");
+  // grab URL and pass it to the browser
+  $apidata_ind=curl_exec($ch);
+  $nye = json_decode($apidata_ind);
 
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-      curl_setopt($ch, CURLOPT_HEADER, 0);
+   if(isset($nye->error)) {
+       print_r($nye);
+	   die($nye->error);
+   } else {
+       $cur_doc = $nye->response->docs[0];
+       $url = $cur_doc->medium_image_url;
+	   $nr = 0;
+       echo "<image src=\"$url\" height=\"420\" width=\"420\" >";
+       foreach($cur_doc->artist_name as $cur_artist) {
+	       if($nr==0)
+		       echo "<br />$cur_artist";
+           else
+			   echo ", $cur_artist";
+		    $nr++;
+       }
+	   echo ": ";
 
-      // grab URL and pass it to the browser
-      $apidata_ind=curl_exec($ch);
+       if($cur_doc->title_first)
+           echo "$cur_doc->title_first";
 
-      $nye = json_decode($apidata_ind);
-
-      if(isset($nye->error)) {
-          print_r($nye);
-	  die($nye->error);
-      }
-      else {
-		# print_r($nye->response->docs);
-		foreach($nye->response->docs as $cur_doc) {
-			$url = $cur_doc->medium_image_url;
-			$nr = 0;
-                	echo "<image src=\"$cur_doc->medium_image_url\" height=\"420\" width=\"420\" >";
-                     	foreach($cur_doc->artist_name as $cur_artist) {
-		         if($nr==0)
-		             echo "<br />$cur_artist";
-                         else
-			     echo ", $cur_artist";
-			$nr++;
-                     	}
-			echo ": ";
-
-                 	if($cur_doc->title_first)
-                     		echo "$cur_doc->title_first";
-
-                 	if($cur_doc->object_type_dk)
-		     		echo " ($cur_doc->object_type_dk)";
-			
-		}
+       if($cur_doc->object_type_dk)
+		  echo " ($cur_doc->object_type_dk)";
       }
 
 ?>
@@ -67,7 +67,7 @@ if (isset($_SESSION['userid'])) {
 <img id="preview" />
 
 <form class="uploadform" action="image.php" method="post" enctype="multipart/form-data" onchange="loadFile(event)">
-	<label id="uploadbtn" class="uploadform__btn uploadform__btn--fileuploadbtn" for="fileToUpload">Upload</label>
+	<label id="uploadbtn" class="uploadform__btn uploadform__btn--fileuploadbtn" for="fileToUpload">Upload your own:</label>
 	<input class="uploadform__fileinput" type="file" name="fileToUpload" id="fileToUpload">
         <input type="hidden" name="image_id" value="<?php print $id; ?>">
         <input type="hidden" name="profile_id" value="<?php print $userid; ?>">

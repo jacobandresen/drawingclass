@@ -8,13 +8,12 @@ require_once('inc/db.php');
       <link rel="stylesheet" href="mock/forsidestyle.css" />
    </head>
    <body>
-   <a href="profile.php">my profile</a>  
    <?php
     $query=get('query');
-    if ($query == "") $query = "picasso";
+    if ($query == "") $query = "Skagen";
     ?>
     <form class="searchbar" id="searchinput" method="GET">
-       <input type="text" class="searchbar__input" placeholder="S&oslash;g kunstner" name="query" />
+       <input type="text" class="searchbar__input" placeholder="Search for art " name="query" />
        <button type="submit" class="searchbar__submit"><i class="fa fa-search " aria-hidden="true"></i></button>
     </form>
 
