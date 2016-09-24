@@ -1,0 +1,13 @@
+<!--UPLOAD FORM-->
+
+<img id="preview" />
+
+<form class="uploadform" action="upload.php" method="post" enctype="multipart/form-data" onchange="loadFile(event)">
+	<label id="uploadbtn" class="uploadform__btn uploadform__btn--fileuploadbtn" for="fileToUpload">Upload</label>
+	<input class="uploadform__fileinput" type="file" name="fileToUpload" id="fileToUpload">
+
+	<div id="accept">
+	<button class="uploadform__btn uploadform__btn--accept" type="submit" name="submit">Accept</button>
+	<button class="uploadform__btn uploadform__btn--decline" type="button" name="submit" onclick="deleteimg()">Delete</button>
+	</div>
+</form>

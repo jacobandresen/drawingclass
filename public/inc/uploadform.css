@@ -1,0 +1,37 @@
+body {
+  margin: 0;
+}
+
+#output {
+  display: none;
+  margin: 20px auto;
+  max-width: 80%;
+  height: auto;
+}
+
+#accept {
+  display: none;
+}
+
+.uploadform__btn {
+  border: 2px solid red;
+  padding: 5px;
+  margin: 2px 0px;
+  display: block;
+  text-align: center;
+  width: 100%;
+  background: none;
+  cursor: pointer;
+}
+.uploadform__btn--fileuploadbtn {
+  border-color: red;
+}
+.uploadform__btn--accept {
+  border-color: green;
+}
+.uploadform__btn--decline {
+  border-color: red;
+}
+.uploadform__fileinput {
+  display: none;
+}
