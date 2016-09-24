@@ -1,4 +1,4 @@
-﻿create table profile (
+create table profile (
   id 				   serial,
   username 			   varchar(256) not null,
   email     			   varchar(256) not null,
