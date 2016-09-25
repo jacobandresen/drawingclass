@@ -46,7 +46,7 @@ if (isset($_SESSION['userid'])) {
        $cur_doc = $nye->response->docs[0];
        $url = $cur_doc->medium_image_url;
 	   $nr = 0;
-       echo "<image src=\"$url\" height=\"420\" width=\"420\" >";
+       echo "<image src=\"$url\" width=\"420\" >";
        foreach($cur_doc->artist_name as $cur_artist) {
 	       if($nr==0)
 		       echo "<br />$cur_artist";
