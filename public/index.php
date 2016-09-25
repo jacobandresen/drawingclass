@@ -10,7 +10,7 @@ require_once('inc/db.php');
    <body>
    <?php
     $query=get('query');
-    if ($query == "") $query = "Skagen";
+    if ($query == "") $query = "Wilhelm Heuer";
     ?>
     <form class="searchbar" id="searchinput" method="GET">
        <input type="text" class="searchbar__input" placeholder="Search for art " name="query" />
