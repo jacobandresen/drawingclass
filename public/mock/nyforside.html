@@ -1,0 +1,37 @@
+<script>
+function login(){
+	var login = document.getElementById("login");
+	if(login.style.display == "none"){
+		login.style.display="block";
+	}else{
+		login.style.display="none"
+	}
+}
+</script>
+
+
+<header class="header">
+	<form class="header__search" method="GET">
+		<input class="header__input header__searchfield" type="text" placeholder="Search for art" name="query">
+		<button class="header__input header__searchsubmit" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+	</form>
+	<a class="header__link" onclick="login()" href="#">Login<a/>
+	<a class="header__link" href="#">Create user<a/>
+</header>
+		
+<h1 class="title">Explore</h1>
+<div class="explore">
+	<!--LOOP HERE-->
+	<a href="" class="explore__box"><img src="http://cspic.smk.dk/globus/GLOBUS%202012/dep595.jpg"></a>
+	<a href="" class="explore__box"><img height="100%" src="http://cspic.smk.dk/globus/GLOBUS%202012/dep599.jpg"></a>
+	<a href="" class="explore__box"><img height="100%" src="http://cspic.smk.dk/globus/GLOBUS%202012/dep599.jpg"></a>
+	
+</div>
+		
+
+<form class="login" method="post" id="login">
+	<a class="login__close" onclick="login()">X</a>
+	<input class="login__input" type="text" placeholder="User" name="username">
+	<input class="login__input" type="password" placeholder="Password" name="password">
+	<input class="login__input login__submit" type="submit" value="Login">
+</form>

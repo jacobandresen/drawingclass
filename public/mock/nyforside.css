@@ -1,0 +1,144 @@
+@import "https://fonts.googleapis.com/css?family=Open+Sans";
+@import "https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css";
+* {
+  font-family: 'Open Sans', sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+.header {
+  background: #fff;
+  width: 100%;
+  min-width: 300px;
+  height: 50px;
+  box-shadow: 0 3px 2px -2px gray;
+}
+.header__search {
+  float: left;
+  height: 100%;
+  width: calc(100% - 170px);
+}
+.header__input {
+  height: 100%;
+  margin: 0;
+  border: none;
+}
+.header__input:focus {
+  outline: none;
+}
+.header__searchsubmit {
+  width: 60px;
+  margin: 0;
+  background: none;
+  cursor: pointer;
+}
+.header__searchsubmit:hover {
+  color: red;
+}
+.header__searchfield {
+  background: transparent;
+  padding-left: 20px;
+  width: calc(100% - 65px);
+}
+.header__link {
+  float: left;
+  padding: 15px 10px;
+  height: 100%;
+  color: #000;
+  text-decoration: none;
+  border-left: 1px solid gray;
+}
+.header__link:hover {
+  background: rgba(0, 0, 0, 0.0345);
+}
+
+.title {
+  height: 55px;
+  padding: 0px 20px;
+  margin: 5px;
+  font-size: 0px;
+  animation: poow 1s 1;
+  animation-fill-mode: forwards;
+  background: -webkit-linear-gradient(gold, red);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@keyframes poow {
+  100% {
+    font-size: 25px;
+  }
+}
+.explore {
+  display: -webkit-box;
+  /* OLD - iOS 6-, Safari 3.1-6 */
+  display: -moz-box;
+  /* OLD - Firefox 19- (buggy but mostly works) */
+  display: -ms-flexbox;
+  /* TWEENER - IE 10 */
+  display: -webkit-flex;
+  /* NEW - Chrome */
+  display: flex;
+  /* NEW, Spec - Opera 12.1, Firefox 20+ */
+  -webkit-flex-flow: row wrap;
+  justify-content: space-around;
+  height: 90%;
+}
+.explore__box {
+  text-align: center;
+  max-width: 250px;
+  max-height: 320px;
+  margin: 20px;
+}
+.explore__box img {
+  height: 100%;
+  max-width: 100%;
+}
+
+/*LOGIN*/
+.login {
+  display: none;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background: #fff;
+  transform: translate(-50%, -50%);
+  width: 400px;
+  height: 270px;
+  margin: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  -webkit-box-shadow: 0px 0px 25px 1px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 25px 1px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 25px 1px rgba(0, 0, 0, 0.75);
+}
+.login__input {
+  background: rgba(0, 0, 0, 0.04);
+  margin: 20px auto;
+  padding: 10px;
+  border: none;
+  width: 80%;
+  font-size: 1.1em;
+  display: block;
+}
+.login__input:focus {
+  width: 82%;
+  transition: ease all .4s;
+  outline: none;
+}
+.login__close {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+  cursor: pointer;
+}
+.login__submit {
+  border: none;
+  cursor: pointer;
+}
+.login__submit:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
