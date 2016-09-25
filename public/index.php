@@ -38,8 +38,10 @@ include ("inc/header.php");
       if(isset($nye->error)) {
           print_r($nye);
 	      die($nye->error);
+	      $antal=0;
       }
       else {
+	$antal=$nye->response->numFound;
         // echo "<ul>\n";
 	 foreach($nye->response->docs as $cur_doc) {
              if(isset($cur_doc->medium_image_url)) {
@@ -62,6 +64,7 @@ include ("inc/header.php");
     }
 
 curl_close($ch);
+if($next+20<$antal) {
 ?>
 </div>
     <form action="index.php" method="GET">
@@ -70,6 +73,8 @@ curl_close($ch);
        <input type="submit" value="N&aelig;ste" />
     </form>
 <?php
+}
+
 if($next>0) {
 ?>
     <form action="index.php" method="GET">
