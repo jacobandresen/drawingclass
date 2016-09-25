@@ -2,6 +2,11 @@
 require_once('inc/db.php');
 session_start();
 
+include "inc/head.php";
+?>
+
+<h2 class="title"> Share </h2>
+<?php
 if (isset($_SESSION['userid']))
 {
     $fileToUpload = get('fileToUpload', null);
@@ -77,3 +82,8 @@ if (isset($_SESSION['userid']))
         }
     }
 }
+
+?>
+
+</body>
+</html>

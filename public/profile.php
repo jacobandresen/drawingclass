@@ -6,14 +6,13 @@ session_start();
 <html>
   <head>
      <title>Remake</title>
-     <link rel="stylesheet" href="mock/forsidestyle.css"/>
+     <link rel="stylesheet" href="mock/nyforside.css"/>
   </head>
   <body>
-  <form class="searchbar" action="index.php" id="searchinput" method="GET">
-     <input type="text" class="searchbar__input" placeholder="Search for art" name="query">
-     <button type="submit" class="searchbar__submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-   </form>
+
 <?php
+    include ("inc/header.php");
+
     $userid= get('id', $_SESSION['userid']);
 
     $res = pg_query($dbconn, "select username, email from profile where id=$userid;");

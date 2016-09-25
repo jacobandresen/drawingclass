@@ -1,23 +1,14 @@
 <?php
 session_start();
 require_once('inc/db.php');
+include ("inc/header.php");
 ?>
-<html>
-   <head>
-      <title>Remake</title>
-      <link rel="stylesheet" href="mock/forsidestyle.css" />
-   </head>
-   <body>
-   <?php
+<h1 class="title">Explore</h1>
+<?php
     $query=get('query');
     if ($query == "") $query = "Wilhelm Heuer";
     ?>
-    <form class="searchbar" id="searchinput" method="GET">
-       <input type="text" class="searchbar__input" placeholder="Search for art " name="query" />
-       <button type="submit" class="searchbar__submit"><i class="fa fa-search " aria-hidden="true"></i></button>
-    </form>
 
- <h1 class="title">Explore</h1>
  <div class="explore">
    <?php
       //show search results
@@ -46,7 +37,7 @@ require_once('inc/db.php');
 
       if(isset($nye->error)) {
           print_r($nye);
-	  die($nye->error);
+	      die($nye->error);
       }
       else {
         // echo "<ul>\n";

@@ -8,18 +8,8 @@ if (isset($_SESSION['userid'])) {
 	header('Location: login.php');
 }
 
+include ("inc/header.php");
 ?>
-<html>
-<head>
-   <title>upload</title>
-   <link rel="stylesheet" href="mock/forsidestyle.css"/>
-</head>
-<body>
-
-<form class="searchbar" action="index.php" id="searchinput" method="GET">
- <input type="text" class="searchbar__input" placeholder="Search for art" name="query"/>
- <button type="submit" class="searchbar__submit"><i class="fa fa-search" aria-hidden="true"></i></button>
-</form>
 
 <h1 class="title">Create</h1>
 <?php
