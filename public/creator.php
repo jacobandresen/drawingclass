@@ -82,15 +82,15 @@ if (isset($_SESSION['userid'])) {
 	</div>
 </form>
 
+
+<div class="explore">
 <?php
   $query = "select archive_id, url, profile_id, email from adaptation,user_image,original_image,profile  where profile_id=profile.id and original_image.id = original_image_id and user_image.id= user_image_id and original_image.source_image_url='".$url."'";
   $res = pg_query($dbconn, $query);
-  echo "<ul>";
   while ($data=pg_fetch_object($res)) {
-      echo '<li><img  src="'.$data->url.'" width="420"><a href="profile.php?id='.$data->profile_id.'">'.$data->email.'</a></li>';
+      echo '<a class="explore__box" href="profile.php?id='.$data->profile_id.'"> <img src="'.$data->url.'" width="420"></a>';
   }
-  echo "</ul>";
-
 ?>
+</div>
 </body>
 </html>
