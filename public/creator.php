@@ -1,6 +1,7 @@
 <?php
 session_start();
 require_once('inc/db.php');
+global $dbconn;
 if (isset($_SESSION['userid'])) {
   $userid = $_SESSION['userid'];
 } else {
@@ -61,7 +62,6 @@ if (isset($_SESSION['userid'])) {
        if($cur_doc->object_type_dk)
 		  echo " ($cur_doc->object_type_dk)";
       }
-
 ?>
 
 <img id="preview" />
@@ -82,5 +82,15 @@ if (isset($_SESSION['userid'])) {
 	</div>
 </form>
 
+<?php
+  $query = "select archive_id, url, profile_id, email from adaptation,user_image,original_image,profile  where profile_id=profile.id and original_image.id = original_image_id and user_image.id= user_image_id and original_image.source_image_url='".$url."'";
+  $res = pg_query($dbconn, $query);
+  echo "<ul>";
+  while ($data=pg_fetch_object($res)) {
+      echo '<li><img  src="'.$data->url.'" width="420"><a href="profile.php?id='.$data->profile_id.'">'.$data->email.'</a></li>';
+  }
+  echo "</ul>";
+
+?>
 </body>
 </html>
