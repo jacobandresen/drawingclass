@@ -1,4 +1,4 @@
-﻿create table profile (
+create table profile (
   id 				   serial,
   username 			   varchar(256) not null,
   email     			   varchar(256) not null,
@@ -27,6 +27,7 @@ create table user_image (
 
 create table original_image (
   id 	     			   serial,
+  original_id          varchar(256) NOT null,
   archive_id			   integer NOT null,
   title				   TEXT not null, 
   artist			   varchar not null,
